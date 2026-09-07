@@ -1,0 +1,533 @@
+/* ============================================================
+   $anchit Builds — redirect.css
+   Styled branded redirect / loading screen
+   ============================================================ */
+
+:root {
+  --primary: #0ea5e9;
+  --primary-soft: rgba(14, 165, 233, 0.12);
+  --secondary: #06b6d4;
+  --accent: #10b981;
+  --danger: #ef4444;
+
+  --bg-primary: #f0f9ff;
+  --bg-card: rgba(255, 255, 255, 0.82);
+  --bg-nav: rgba(240, 249, 255, 0.9);
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  --border-color: rgba(14, 165, 233, 0.18);
+  --shadow-card:
+    0 8px 48px rgba(14, 165, 233, 0.16), 0 2px 8px rgba(0, 0, 0, 0.06);
+  --gradient: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+  --gradient-hero: linear-gradient(
+    160deg,
+    #f0f9ff 0%,
+    #e0f2fe 40%,
+    #bae6fd 100%
+  );
+
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0b1120;
+  --bg-card: rgba(17, 24, 39, 0.85);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+  --border-color: rgba(14, 165, 233, 0.15);
+  --shadow-card: 0 8px 48px rgba(0, 0, 0, 0.45);
+  --gradient-hero: linear-gradient(
+    160deg,
+    #0b1120 0%,
+    #0f172a 40%,
+    #0c1f35 100%
+  );
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--gradient-hero);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font-family: var(--font);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ─── Background Shapes ─── */
+.bg-shapes {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.5;
+  animation: floatShape 16s ease-in-out infinite;
+}
+
+[data-theme="dark"] .shape {
+  opacity: 0.15;
+}
+
+.shape-1 {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(
+    circle,
+    rgba(14, 165, 233, 0.35),
+    transparent 70%
+  );
+  top: -180px;
+  left: -120px;
+  animation-delay: 0s;
+}
+.shape-2 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.28), transparent 70%);
+  bottom: -100px;
+  right: -120px;
+  animation-delay: -7s;
+}
+.shape-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(16, 185, 129, 0.22),
+    transparent 70%
+  );
+  top: 40%;
+  left: 40%;
+  animation-delay: -13s;
+}
+
+@keyframes floatShape {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  40% {
+    transform: translate(25px, -35px) scale(1.04);
+  }
+  70% {
+    transform: translate(-15px, 20px) scale(0.97);
+  }
+}
+
+/* ─── Main Layout ─── */
+.redirect-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Glass Card ─── */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+
+/* ─── Redirect Card ─── */
+.redirect-card {
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  animation: cardIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ─── Brand Area ─── */
+.brand-area {
+  margin-bottom: 28px;
+}
+
+.redirect-logo {
+  margin: 0 auto 14px;
+  width: 76px;
+  height: 76px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(14, 165, 233, 0.3);
+  animation: logoBounce 3.5s ease-in-out infinite;
+}
+
+.brand-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.brand-dollar {
+  background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Thanks Area ─── */
+.thanks-area {
+  margin-bottom: 24px;
+}
+
+.thanks-heading {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+.heart {
+  display: inline-block;
+  animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+.thanks-desc {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  animation: fadeInUp 0.6s ease 0.3s both;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+/* ─── Destination Info ─── */
+.redirect-dest-info {
+  margin-bottom: 28px;
+  padding: 12px 18px;
+  background: var(--primary-soft);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  animation: fadeInUp 0.6s ease 0.35s both;
+}
+
+.dest-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.dest-url {
+  font-size: 0.82rem;
+  font-family: "Menlo", "Consolas", monospace;
+  color: var(--text-secondary);
+  word-break: break-all;
+  line-height: 1.5;
+}
+
+/* ─── Loader Dots ─── */
+.loader-area {
+  margin-bottom: 24px;
+  animation: fadeInUp 0.6s ease 0.4s both;
+}
+
+.loader-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gradient);
+  animation: dotBounce 1.4s ease-in-out infinite;
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.4);
+}
+
+.dot-1 {
+  animation-delay: 0s;
+}
+.dot-2 {
+  animation-delay: 0.18s;
+}
+.dot-3 {
+  animation-delay: 0.36s;
+}
+
+/* ─── Progress Bar ─── */
+.progress-wrap {
+  margin-bottom: 8px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(14, 165, 233, 0.15);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--gradient);
+  border-radius: 100px;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px rgba(14, 165, 233, 0.5);
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-pct {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.progress-eta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ─── Security Note ─── */
+.security-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 100px;
+  animation: fadeIn 0.6s ease 0.6s both;
+}
+
+/* ─── Error State ─── */
+.error-icon {
+  margin: 0 auto 20px;
+  color: var(--danger);
+  opacity: 0.85;
+  animation: shake 0.5s ease 0.2s both;
+}
+
+.error-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.error-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+  line-height: 1.65;
+}
+
+/* ─── Primary Button ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: var(--gradient);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.45);
+}
+
+/* ─── Footer ─── */
+.redirect-footer {
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.redirect-footer .footer-link {
+  color: var(--primary);
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.redirect-footer .footer-link:hover {
+  opacity: 0.75;
+}
+
+/* ─── Animations ─── */
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes logoBounce {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  30% {
+    transform: translateY(-6px) rotate(-3deg);
+  }
+  60% {
+    transform: translateY(-2px) rotate(2deg);
+  }
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.25);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.15);
+  }
+  56% {
+    transform: scale(1);
+  }
+}
+
+@keyframes dotBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  45% {
+    transform: translateY(-12px);
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  40% {
+    transform: rotate(8deg);
+  }
+  60% {
+    transform: rotate(-4deg);
+  }
+  80% {
+    transform: rotate(4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 520px) {
+  .redirect-card {
+    padding: 32px 22px;
+  }
+  .thanks-heading {
+    font-size: 1.35rem;
+  }
+  .redirect-logo {
+    width: 60px;
+    height: 60px;
+  }
+}
